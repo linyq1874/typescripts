@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "es6",
+    "moduleResolution": "node",
+    "strict": true,
+    // "strictNullChecks": false,
+    "sourceMap": true,
+    "outDir": "./output/"
+  },
+  "include": ["."],
+  "exclude": ["node_modules"]
+}
