@@ -20,10 +20,10 @@ const split = function (s: string) {
     return s.split('');
 }
 
-function thisIsVoid() {}
+function thisIsVoid() { }
 
 function voidOrArray(str?: string) {
-    return str ? split(str): thisIsVoid();
+    return str ? split(str) : thisIsVoid();
 }
 
 function getFalsy(type: string) {
@@ -85,7 +85,21 @@ let unknownObj: unknown = 1;
 // 类型断言并不是一定会成功的，TypeScript 会对断言进行一定的验证
 
 let objA: {
-    a: number
+    a: number,
 } = { a: 1 };
 
 // (objA as { b: number }).b = 2; // error 直接断言一个不兼容的类型会报错
+
+
+// 类型推断作用
+const oBtn: HTMLElement = document.querySelector('button');
+oBtn.addEventListener('click', handleClick, false);
+
+function handleClick(e: MouseEvent) {
+    console.log('button', e);
+
+    const tar = e.target;
+    // const tar = e.target as HTMLElement;
+
+    // const tagName = tar.tagName;
+}

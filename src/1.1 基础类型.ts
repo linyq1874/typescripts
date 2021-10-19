@@ -1,12 +1,10 @@
 /**
  * 1.1 基础类型
  */
-
-// import 'jquery'
-
+import 'jquery'; // 使文件形成一个模块
 // 1.1.1 基本类型
 
-const str: string = 'abc'
+const str: string = 'abc';
 const num: number = 0
 const bool: boolean = true
 const nul: null = null
@@ -16,14 +14,15 @@ const syb: symbol = Symbol('test')
 // 要使用 bigint 类型，必须在 tsconfig.json 中将 target 设置为 "esnext"
 const bign: bigint = 1n
 
-// 如果没有配置 strictNullChecks，null 和 undefined 默认是所有类型的子类型
-// let strUndef: string = undefined;
-// strUndef = null;
 
-// 如果配置了 strictNullChecks，需要显式地将 null 和 undefined 包含到类型声明
-let strNull: string | null = null
-// 注意：此时 null 和 undefined 是不等价的
-// strNull = undefined; // error
+
+// 注意：使用构造函数 String 创造的对象不是基本类型字符串：
+// const createByNewString: string = new String('s');
+const createByNewString1: String = new String('s');
+const createByNewString2: string = String('s');
+
+
+
 
 // 1.1.2 ts 的一些特殊的“基本”类型
 
@@ -35,6 +34,14 @@ a = 1 // ok
 a = '1' // ok
 a = [true, Symbol()] // ok
 a++
+// 可以认为，声明一个变量为任意值之后，对它的任何操作，返回的内容的类型都是任意值。
+
+// 变量如果在声明的时候，未指定其类型，那么它会被识别为任意值类型：
+let something;
+something = 'seven';
+something = 7;
+
+
 
 // 1.1.2.2 unknown
 // 和 any 类型相似，unknown 类型也可以表示任意类型。但对 unknown 类型执行除了赋值之外任何操作或运算，都必须先进行类型断言，否则会报错
@@ -42,20 +49,16 @@ a++
 let b: unknown = {}
 b = null
 b = 1
-// b += 1; // error
-;(b as number) += 1 // 使用 as 关键字进行类型断言
+  // b += 1; // error
+  ; (b as number) += 1 // 使用 as 关键字进行类型断言
 // let b1: number = b; // unknown 类型只能赋值给 any 或 unknown 类型的变量
 let b1: number = <number>b // 使用“尖括号语法”进行类型断言
 
 // 1.1.2.3 void
 
 // void 主要用于 function，表示没有任何返回值
-function foo(): void {}
+function foo(): void { }
 
-// 用于声明变量的类型没有意义，严格模式下你只能把 undefined 赋值给 void 类型，非严格模式下可以把 null 赋值给 void 类型
-let v: void = void 0
-v = undefined
-// v = null;
 
 // 1.1.2.4 never
 // never 表示一个永远不会到达的值
@@ -66,7 +69,7 @@ function bar(): never {
 }
 
 function bar1(): never {
-  while (true) {}
+  while (true) { }
 }
 
 function bar2(): never {
@@ -76,9 +79,9 @@ function bar2(): never {
 // 也可以用于泛型类型
 new Promise<never>((resolve, reject) => {
   console.log('haha')
-  // resolve(undefined);
+  resolve(undefined);
   // resolve(100); // error，只能传入 never 或 undefined
-  // resolve(bar()); // ok
+  resolve(bar()); // ok
 })
 let neverArr: Array<never> = [bar(), bar1(), bar2()]
 // neverArr.push(void 0); // error
@@ -87,6 +90,8 @@ let neverArr: Array<never> = [bar(), bar1(), bar2()]
 // 那些运算后变成空集的高级类型也会被认为是 never
 let IamNever: string & number
 let IamNeverToo: Exclude<string, string>
+
+
 
 // 1.1.3 字面量类型
 // 字面量可以直接作为类型

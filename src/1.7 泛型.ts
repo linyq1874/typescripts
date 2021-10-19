@@ -71,7 +71,8 @@ function formatNews<T extends {
     return data.reduce((html, item) => `${html}<div class="news-item"><h1><a href="${item.url}">${item.title}</a></h1></div>`, '');
 }
 
-formatNews<{ 
+formatNews<{
     title: string;
     url: string;
-    desc: string }>([]); // error，没有 title 和 url 属性
+    desc: string
+}>([]); // error，没有 title 和 url 属性

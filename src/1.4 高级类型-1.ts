@@ -51,6 +51,7 @@ aOrB = {
 
 
 // 1.4.3 类型保护
+// 类型保护指的是，利用一些表达式，使得联合类型在某个作用域内只被当作某一子类型
 
 function getAB(isA: boolean): TypeA | TypeB {
     return isA ? { a: 1, c: true } : { b: 2, c: false };
@@ -60,12 +61,13 @@ aOrB = getAB(true);
 // 下面两行都会报 error
 // aOrB.a = 2;
 // aOrB.b = 3;
+// aOrB.c = false;
 
 // 频繁使用类型断言会让代码变得繁琐
 (aOrB as TypeA).a = 2;
 (aOrB as TypeB).b = 3;
 
-// 类型保护指的是，利用一些表达式，使得联合类型在某个作用域内只被当作某一子类型
+
 
 // 1.4.3.1 使用类型谓词 parameterName is Type 区分类型
 function isA(o: TypeA | TypeB): o is TypeA {

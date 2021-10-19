@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+        "target": "esnext", /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', or 'ESNEXT'. */
+        "module": "esnext", /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */
+        "removeComments": true,
+        // "strictNullChecks": false,
+        /*
+            常量枚举适用于那些运行阶段不需要再依赖的枚举类型，在编译阶段将被删除，可以避免占用更多的资源
+        */
+        // "preserveConstEnums": true,
+        /*
+            this 隐式具有 any 类型，如果没有指定类型注解，编译器会提示“"this" 隐式具有类型 "any"，因为它没有类型注释。
+        */
+        "strict": false,
+        "noImplicitThis": true,
+        "outDir": "./dist",
+    },
+    /*
+    files 配置项值是一个数组，用来指定了待编译文件，即入口文件。
+    当入口文件依赖其他文件时，不需要将被依赖文件也指定到 files 中，因为编译器会自动将所有的依赖文件归纳为编译对象，即 index.ts 依赖 user.ts 时，不需要在 files 中指定 user.ts ， user.ts 会自动纳入待编译文件。
+  */
+    // "files": [],
+    "include": [
+        "src" // 会编译src目录下的所有文件，包括子目录
+        // "src/*" // 只会编译src一级目录下的文件
+        // "src/*/*" // 只会编译src二级目录下的文件
+    ],
+    "exclude": [
+        "node_modules"
+    ],
+}

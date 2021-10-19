@@ -7,7 +7,7 @@
 // 1.5.1.1 类的基本语法
 // 类的语法和 es 的类规范基本一致，不同点之一是增加了 private、public、protected、readonly 等修饰符，以及可选类成员
 
-import 'jquery';
+// import 'jquery';
 
 class A {
     constructor(_a: number) {
@@ -30,6 +30,13 @@ class A {
 let ca = new A(100);
 ca.c && ca.c();
 
+// 修饰符和readonly还可以使用在构造函数参数中，等同于类中定义该属性同时给该属性赋值，使代码更简洁。
+class Animal {
+    // public name: string;
+    public constructor(public name) {
+        // this.name = name;
+    }
+}
 
 
 // 1.5.1.2 抽象类
@@ -55,7 +62,7 @@ class CheckClass extends AbsCheck {
 new CheckClass(1);
 
 // 特殊情况：抽象类继承抽象类，可以不必实现抽象成员
-abstract class AbsCheck2 extends AbsCheck {}
+abstract class AbsCheck2 extends AbsCheck { }
 
 
 
@@ -114,7 +121,7 @@ class checkB implements IA {
 interface stringObj {
     [key: string]: string;
     // a: 'a'; // ok
-    // b: 1; // error，
+    // b: 1; // error
 }
 
 let strO: stringObj = {};
